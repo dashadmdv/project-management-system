@@ -60,6 +60,7 @@ class Database:
             self.execute(sql, (name, datetime.datetime.today().strftime('%Y-%m-%d')))
             return "Project added!"
         except Exception as e:
+            self.execute("ROLLBACK")
             return e
 
     def add_contract(self, name: str):
@@ -71,6 +72,7 @@ class Database:
             self.execute(sql, (name, datetime.datetime.today().strftime('%Y-%m-%d'), 'draft'))
             return "Contract added!"
         except Exception as e:
+            self.execute("ROLLBACK")
             return e
 
     def change_contract_status(self, status, contract_id):

@@ -2,9 +2,9 @@ import datetime
 
 
 class Project:
-    def __init__(self, name):
+    def __init__(self, name, date_of_creation=None):
         self._name = name
-        self._date_of_creation = datetime.datetime.today().strftime('%d-%m-%Y')
+        self._date_of_creation = date_of_creation or datetime.datetime.today().strftime('%Y-%m-%d')
         self._contracts = []
 
     @property

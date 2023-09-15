@@ -2,12 +2,12 @@ import datetime
 
 
 class Contract:
-    def __init__(self, name):
+    def __init__(self, name, date_of_creation=None, date_of_approval=None, status='draft', parent_project=None):
         self._name = name
-        self._date_of_creation = datetime.datetime.today().strftime('%d-%m-%Y')
-        self._date_of_approval = None
-        self._status = 'draft'
-        self._parent_project = None
+        self._date_of_creation = date_of_creation or datetime.datetime.today().strftime('%Y-%m-%d')
+        self._date_of_approval = date_of_approval
+        self._status = status
+        self._parent_project = parent_project
 
     @property
     def name(self):
@@ -31,7 +31,7 @@ class Contract:
             pass
         else:
             if s == 'active':
-                self._date_of_approval = datetime.datetime.today().strftime('%d/%m/%Y')
+                self._date_of_approval = datetime.datetime.today().strftime('%Y-%m-%d')
             self._status = s
 
     @property

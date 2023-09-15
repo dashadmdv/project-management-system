@@ -2,7 +2,8 @@ import datetime
 
 
 class Contract:
-    def __init__(self, name, date_of_creation=None, date_of_approval=None, status='draft', parent_project=None):
+    def __init__(self, name, date_of_creation=None,
+                 date_of_approval=None, status='draft', parent_project=None):
         self._name = name
         self._date_of_creation = date_of_creation or datetime.datetime.today().strftime('%Y-%m-%d')
         self._date_of_approval = date_of_approval
@@ -26,13 +27,13 @@ class Contract:
         return self._status
 
     @status.setter
-    def status(self, s: str):
-        if s not in ['draft', 'active', 'completed']:
+    def status(self, status: str):
+        if status not in ['draft', 'active', 'completed']:
             pass
         else:
-            if s == 'active':
+            if status == 'active':
                 self._date_of_approval = datetime.datetime.today().strftime('%Y-%m-%d')
-            self._status = s
+            self._status = status
 
     @property
     def parent_project(self):

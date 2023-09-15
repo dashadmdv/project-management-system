@@ -1,8 +1,8 @@
 import psycopg2
+from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 from src.config import (
     DB_HOST, DB_USER, DB_PASSWORD, DB_NAME
 )
-from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 
 def close(conn, cursor):
@@ -12,7 +12,8 @@ def close(conn, cursor):
 
 def create_database():
     try:
-        conn = psycopg2.connect(host=DB_HOST, user=DB_USER, password=DB_PASSWORD)
+        conn = psycopg2.connect(
+            host=DB_HOST, user=DB_USER, password=DB_PASSWORD)
     except Exception as e:
         print(f"Unable to connect to server!\n{e}")
     else:
@@ -31,7 +32,8 @@ def create_database():
 
 def create_tables():
     try:
-        conn = psycopg2.connect(host=DB_HOST, user=DB_USER, password=DB_PASSWORD, database=DB_NAME)
+        conn = psycopg2.connect(
+            host=DB_HOST, user=DB_USER, password=DB_PASSWORD, database=DB_NAME)
     except Exception as e:
         print(f"Unable to connect to database!\n{e}")
     else:

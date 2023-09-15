@@ -1,3 +1,5 @@
+import sys
+
 from src.storage.database import Database
 
 
@@ -7,7 +9,7 @@ class CLIController:
             db = Database()
         except Exception as e:
             print(f'Unable to connect!\n{e}')
-            exit()
+            sys.exit()
         else:
             self.db = db
 
@@ -42,8 +44,7 @@ class CLIController:
         active_count = self.db.count_all_active_contracts()
         if active_count:
             return self.db.add_project(input("Input project name: "))
-        else:
-            return "Can't create a project when there aren't any active contracts!"
+        return "Can't create a project when there aren't any active contracts!"
 
     def change_contract_status(self, contract_id, status: str):
         return self.db.change_contract_status(status, contract_id)

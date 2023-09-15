@@ -86,6 +86,10 @@ class CLI:
                 case '1':
                     print(self.controller.add_project())
                 case '2':
+                    project_ids = self.controller.get_projects_ids()
+                    if not project_ids:
+                        print("There are no projects!")
+                        continue
                     project_id = None
                     contract_id = None
                     while True:
@@ -108,6 +112,10 @@ class CLI:
                     if project_id and contract_id:
                         print(self.controller.add_contract_to_project(contract_id, project_id))
                 case '3':
+                    project_ids = self.controller.get_projects_ids()
+                    if not project_ids:
+                        print("There are no projects!")
+                        continue
                     project_id = self.input_id_with_check("Select project that has the needed contract (ENTER ID)",
                                                           self.controller.get_projects_ids())
                     if not project_id:
@@ -128,14 +136,61 @@ class CLI:
                     print(self.controller.change_contract_status(contract_id, 'completed'))
 
     def contract_dialog(self):
-        pass
+        prompt = "Choose an option 1 - create a contract, 2 - approve the contract, 3 - complete the contract"
+        while True:
+            contract_action_choice = self.input_with_check(prompt, ['1', '2', '3'])
+            if self.always_available_operations(contract_action_choice):
+                break
+            match contract_action_choice:
+                case '1':
+                    print(self.controller.add_contract())
+                case '2':
+                    contract_ids = self.controller.get_contracts_ids()
+                    if not contract_ids:
+                        print("There are no contracts!")
+                        continue
+                    while True:
+                        contract_id = self.input_id_with_check("Select contract to approve (ENTER ID)", contract_ids)
+                        if not self.always_available_operations_input_id(contract_id):
+                            continue
+                        else:
+                            break
+                    if not contract_id:
+                        continue
+                    if self.controller.get_contract(contract_id)[-2] == 'active':
+                        print("The contract is already approved! Choose another one!")
+                        continue
+                    elif self.controller.get_contract(contract_id)[-2] == 'completed':
+                        print("The contract is completed! Choose another one!")
+                        continue
+                    print(self.controller.change_contract_status(contract_id, 'active'))
+                case '3':
+                    contract_ids = self.controller.get_contracts_ids()
+                    if not contract_ids:
+                        print("There are no contracts!")
+                        continue
+                    while True:
+                        contract_id = self.input_id_with_check("Select contract to approve (ENTER ID)", contract_ids)
+                        if not self.always_available_operations_input_id(contract_id):
+                            continue
+                        else:
+                            break
+                    if not contract_id:
+                        continue
+                    if self.controller.get_contract(contract_id)[-2] == 'completed':
+                        print("The contract is already completed! Choose another one!")
+                        continue
+                    print(self.controller.change_contract_status(contract_id, 'completed'))
 
     def show_projects_list(self):
         projects_list = self.controller.get_projects_list()
         table = PrettyTable()
         table.field_names = ["Project id", "Name", "Date of creation (yyyy-mm-dd)"]
         table.add_rows(projects_list)
-        print(table)
+        if not projects_list:
+            print("There are no contracts!")
+        else:
+            print(table)
 
     def show_contracts_list(self, source=None):
         contracts_list = source if source is not None else self.controller.get_contracts_list()

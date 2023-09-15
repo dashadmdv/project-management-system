@@ -36,7 +36,7 @@ class CLIController:
         return self.db.count_active_contracts_by_project(project_id)
 
     def add_contract(self):
-        pass
+        return self.db.add_contract(input("Input contract name: "))
 
     def add_project(self):
         active_count = self.db.count_all_active_contracts()

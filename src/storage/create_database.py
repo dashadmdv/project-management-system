@@ -14,7 +14,7 @@ def create_database():
     try:
         conn = psycopg2.connect(host=DB_HOST, user=DB_USER, password=DB_PASSWORD)
     except Exception as e:
-        print(f'Unable to connect to server!\n{e}')
+        print(f"Unable to connect to server!\n{e}")
     else:
         conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
         cursor = conn.cursor()
@@ -22,18 +22,18 @@ def create_database():
         try:
             sql = f"CREATE DATABASE {DB_NAME}"
             cursor.execute(sql)
-            print('Database created!')
+            close(conn, cursor)
+            print("Database created!")
         except Exception as e:
+            close(conn, cursor)
             print(e)
-
-        close(conn, cursor)
 
 
 def create_tables():
     try:
         conn = psycopg2.connect(host=DB_HOST, user=DB_USER, password=DB_PASSWORD, database=DB_NAME)
     except Exception as e:
-        print(f'Unable to connect to database!\n{e}')
+        print(f"Unable to connect to database!\n{e}")
     else:
         cursor = conn.cursor()
         with conn:
@@ -43,7 +43,7 @@ def create_tables():
                 name VARCHAR(100) NOT NULL,
                 date_of_creation DATE NOT NULL);
             """)
-        print('Table of projects created!')
+        print("Table of projects set up!")
 
         with conn:
             cursor.execute("""
@@ -55,6 +55,6 @@ def create_tables():
                 status VARCHAR(10) NOT NULL DEFAULT 'draft',
                 project_id BIGINT REFERENCES project (id));
             """)
-        print('Table of contracts created!')
+        print("Table of contracts set up!")
 
         close(conn, cursor)

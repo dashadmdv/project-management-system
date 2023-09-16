@@ -46,7 +46,7 @@ class CLI:
     # so that we can input id = 8 or 9
     def input_id_with_check(
             self, prompt: str, values_list: list, back_mode=True):
-        prompt += (", or also _8 (with _ !) - show projects list" + ", _9 (with _ !) - show" +
+        prompt += (", or also _8 (with _ !) - show projects list" + ", _9 (with _ !) - show " +
                    "contracts list" + (self.back_prompt if back_mode else self.exit_prompt)) + ": "
         values_list.extend(['_8', '_9', '0'])
         while True:
@@ -132,10 +132,16 @@ class CLI:
                     if not project_ids:
                         print("There are no projects!")
                         continue
-                    project_id = self.input_id_with_check(
-                        "Select project that has the needed contract (ENTER ID)",
-                        self.controller.get_projects_ids())
-                    if not project_id:
+                    while True:
+                        project_id = self.input_id_with_check(
+                            "Select project that has the needed contract (ENTER ID)",
+                            self.controller.get_projects_ids())
+                        if not self.always_available_operations_input_id(
+                                project_id):
+                            continue
+                        break
+
+                    if not int(project_id):
                         continue
 
                     print(
@@ -143,9 +149,15 @@ class CLI:
                     contracts_list = self.show_contracts_list(
                         source=self.controller.get_all_contracts_by_project(project_id))
                     if not contracts_list:
+                        print("There are no contracts!")
                         continue
-                    contract_id = self.input_id_with_check("Select contract to complete (ENTER ID)",
-                                                           [str(x[0]) for x in contracts_list])
+                    while True:
+                        contract_id = self.input_id_with_check("Select contract to complete (ENTER ID)",
+                                                               [str(x[0]) for x in contracts_list])
+                        if not self.always_available_operations_input_id(
+                                contract_id):
+                            continue
+                        break
                     if not contract_id:
                         continue
                     if self.controller.get_contract(

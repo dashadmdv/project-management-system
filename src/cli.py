@@ -124,7 +124,9 @@ class CLI:
                         if contract_id == "0":
                             continue
                         break
-                    if project_id and contract_id:
+                    if project_id == '0':
+                        continue
+                    if int(project_id) and int(contract_id):
                         print(self.controller.add_contract_to_project(
                             contract_id, project_id))
                 case '3':
@@ -144,8 +146,6 @@ class CLI:
                     if not int(project_id):
                         continue
 
-                    print(
-                        self.controller.get_all_contracts_by_project(project_id))
                     contracts_list = self.show_contracts_list(
                         source=self.controller.get_all_contracts_by_project(project_id))
                     if not contracts_list:
@@ -158,7 +158,7 @@ class CLI:
                                 contract_id):
                             continue
                         break
-                    if not contract_id:
+                    if not int(contract_id):
                         continue
                     if self.controller.get_contract(
                             contract_id)[-2] == 'completed':
@@ -190,7 +190,7 @@ class CLI:
                                 contract_id):
                             continue
                         break
-                    if not contract_id:
+                    if not int(contract_id):
                         continue
                     if self.controller.get_contract(
                             contract_id)[-2] == 'active':
@@ -213,7 +213,7 @@ class CLI:
                                 contract_id):
                             continue
                         break
-                    if not contract_id:
+                    if not int(contract_id):
                         continue
                     if self.controller.get_contract(
                             contract_id)[-2] == 'completed':

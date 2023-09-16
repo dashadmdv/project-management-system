@@ -129,8 +129,9 @@ class Database:
         return self.fetchall()
 
     def count_all_active_contracts(self):
-        return self.query(
-            "SELECT COUNT(*) FROM contract WHERE status = 'active';")
+        sql = "SELECT COUNT(*) FROM contract WHERE status = 'active';"
+        self.execute(sql)
+        return self.fetchone()[0]
 
     def count_active_contracts_by_project(self, project_id):
         sql = "SELECT COUNT(*) FROM contract WHERE project_id = %s AND status = 'active'"

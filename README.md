@@ -9,6 +9,7 @@ Contract&amp;project management system.
 * [Environment variables](#environment-variables)
 * [Functionality](#functionality) 
 * [Interface](#interface)
+* [Program flow (with screenshots)](#program-flow)
 
 ## Technologies
 
@@ -109,3 +110,54 @@ We also have 'bonus' options that we can get access for from any point of the pr
 * see the `list` of all `projects`
 * go `back`
   * go `back` = `exit` when we are at the start of the program
+
+## Program flow
+
+When the user runs the program, they get greetings and the database status message.
+* the database already exists<br>
+![Database opening](https://github.com/dashadmdv/project-management-system/assets/69718734/55a679e3-3585-48c3-b01d-88775addb626)
+* the database has been created just now<br>
+![Database creation](https://github.com/dashadmdv/project-management-system/assets/69718734/aa93a793-6bad-4782-a1c3-5737fa7ddb32)
+
+Then the user gets choice to work with projects or contracts. The user can also choose so-called 'always available operations': show projects/contracts list and go back:<br>
+![Always available operations](https://github.com/dashadmdv/project-management-system/assets/69718734/0c6d8f77-dc9d-46b1-8098-99f44cd69508)
+If the user is at the start of the program, they can exit:<br>
+![Exit from program](https://github.com/dashadmdv/project-management-system/assets/69718734/d68cbd34-f261-4eb3-b1ee-e7c0b9749f48)
+
+If the user chooses to work with projects, they get the following options:
+* create project
+  * successful creating<br>
+  ![Creating a project](https://github.com/dashadmdv/project-management-system/assets/69718734/e11405a2-6612-4f32-884e-7998c92d9263)
+  * trying to create project when there are no active contracts
+  ![Trying to create a new project when there are no active contracts](https://github.com/dashadmdv/project-management-system/assets/69718734/0151ad9c-fcbb-4e21-8a01-375687b0cf0e)
+* add a contract to the project
+  * successful adding<br>
+  ![Adding an active contract to the project](https://github.com/dashadmdv/project-management-system/assets/69718734/426067a4-97b4-44ca-8eed-930bc5848213)
+  You can see that the added contract gets the id of the parent project stored.
+  * trying to add to a project that already has an active contract<br>
+  ![Trying to add new contract to a project that already has an active contract](https://github.com/dashadmdv/project-management-system/assets/69718734/d476e8a5-3874-43c6-95cb-d8edbc0d226c)
+  * trying to add the contract that is already used in another project<br>
+  ![Trying to add to a project the contract that is already used in another project](https://github.com/dashadmdv/project-management-system/assets/69718734/6d49f48e-ee12-4d54-978e-3d5a1f38cb7c)
+  * trying to add inactive contract to the project<br>
+  ![Trying to add inactive contract to the project](https://github.com/dashadmdv/project-management-system/assets/69718734/075d5fab-d6a3-4710-bcc7-9d877173802e)
+* complete the contract
+  * successful completing<br>
+  ![Successful project completing](https://github.com/dashadmdv/project-management-system/assets/69718734/9fa69c82-f9aa-4397-acf0-374141f2d1ff)
+  * trying to complete an already completed project<br>
+  * ![Trying to complete an already completed project](https://github.com/dashadmdv/project-management-system/assets/69718734/eb29203b-fb9b-40db-886c-0e3e5b410632)
+
+If the user chooses to work with contracts, they get the following options:
+* create contract<br>
+![Creating a contract](https://github.com/dashadmdv/project-management-system/assets/69718734/0a25ecd2-f3aa-4348-8bcf-096aa9407946)
+You can see that contract is created as the draft, and it doesn't have the date of approval since it's not active.
+* approve the contract
+  * successful approving<br>
+  ![Approve the contract](https://github.com/dashadmdv/project-management-system/assets/69718734/87d587cd-8930-4abe-b545-cb592036ad8a)
+  You can see that contract got the date of approval along with the `active` status.
+  * trying to approve the already approved contract<br>
+  ![Trying to aprove the already approved contract](https://github.com/dashadmdv/project-management-system/assets/69718734/8f4e00c6-772a-47cd-80af-26a6f84c67f9)
+* complete the contract
+  * successful completing<br>
+  ![Complete the contract](https://github.com/dashadmdv/project-management-system/assets/69718734/cc872586-c662-456e-a526-43d827852956)
+  * trying to complete the already completed contract<br>
+  ![Trying to complete the already completed contract](https://github.com/dashadmdv/project-management-system/assets/69718734/f43d81b7-3957-4b6d-8a28-6c050d3b9264)

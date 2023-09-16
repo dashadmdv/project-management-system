@@ -51,7 +51,7 @@ def create_tables():
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS contract (
                 id BIGSERIAL NOT NULL PRIMARY KEY,
-                name VARCHAR(100) NOT NULL UNIQUE,
+                name VARCHAR(100) NOT NULL,
                 date_of_creation DATE NOT NULL,
                 date_of_approval DATE,
                 status VARCHAR(10) NOT NULL DEFAULT 'draft',

@@ -13,8 +13,8 @@ Contract&amp;project management system.
 
 ## Technologies
 
-* Python 3.10
-* PostgreSQL 12
+* Python
+* PostgreSQL
 
 ## Installing
 
@@ -24,6 +24,10 @@ To get this project, you need to clone the code from here with:
 ```
 
 ## Dependencies
+
+First you should set up the virtual environment in your project. PyCharm automatically suggests 
+you to do it and installs all requirements, so you can skip this step if you use PyCharm. 
+You can also <a href="https://www.freecodecamp.org/news/how-to-setup-virtual-environments-in-python/" target="_blank">set up and activate venv manually</a>.
 
 - **datetime**: helps to get current date
 - **psycopg2**: PostgreSQL client for Python
@@ -38,29 +42,38 @@ Install dependencies using:
 
 ## Environment variables
 
-To run this project, you need to set the following environment variables to the **.env** file:
+To run this project you need to <b>have PostgreSQL installed</b> on your computer. If you don't have PostgreSQL, 
+you need to download and run a server (<a href="https://commandprompt.com/education/how-to-download-and-install-postgresql/" target="_blank">Windows</a>, 
+<a href="https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql-linux/" target="_blank">Linux</a>, 
+<a href="https://www.google.com/search?q=how+to+download+and+install+postgresql" target="_blank">Other OS</a>).
+
+Then you need to set the following environment variables to the **.env** file:
 
 <table>
     <tbody>
         <tr>
             <td>`DB_HOST`</td>
-            <td>not required</td>
+            <td>your database host (most likely 'localhost'), not required</td>
         </tr>
         <tr>
             <td>`DB_NAME`</td>
-            <td>database with that  name is NOT required to exist</td>
+            <td>database name, not required (the database will be created if not exists)</td>
         </tr>
         <tr>
             <td>`DB_USER`</td>
-            <td rowspan=2>your PostgreSQL username and password (you need <br>to <b>have PostgreSQL installed</b> on your computer)</td>
+            <td rowspan=2>your PostgreSQL username and password</td>
         </tr>
         <tr>
             <td>`DB_PASSWORD`</td>
         </tr>
+        <tr>
+            <td>`DB_PORT`</td>
+            <td>your database port (most likely 5432), not required</td>
+        </tr>
     </tbody>
 </table>
 
-<b>Place the .env file in the src/ folder!!!</b> Example:
+<b>Place the .env file right in the project-management-system/ folder!!!</b> Example:
 ```bash
 DB_HOST = 'localhost'
 DB_NAME = 'pmsystem'
